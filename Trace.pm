@@ -1,7 +1,7 @@
 # -*- perl -*-
 
 package Devel::Trace;
-$VERSION = '0.10';
+$VERSION = '0.11';
 $TRACE = 1;
 
 # This is the important part.  The rest is just fluff.
@@ -118,6 +118,10 @@ You should be able to get the output into a string.
 =back
 
 We'll see.
+
+=head1 LICENSE
+
+Devel::Trace 0.11 and its source code are hereby placed in the public domain.
 
 =head1 Author
 
