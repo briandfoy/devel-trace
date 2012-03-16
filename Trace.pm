@@ -1,7 +1,7 @@
 # -*- perl -*-
 
 package Devel::Trace;
-$VERSION = '0.11';
+$VERSION = '0.12';
 $TRACE = 1;
 
 # This is the important part.  The rest is just fluff.
