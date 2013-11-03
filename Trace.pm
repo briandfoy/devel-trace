@@ -68,10 +68,14 @@ For example, if your program looks like this:
 Then  the C<Trace> output will look like this:
 
         >> ./test:4: print "Statement 1 at line 4\n";
+        Statement 1 at line 4
         >> ./test:5: print "Statement 2 at line 5\n";
+        Statement 2 at line 5
         >> ./test:6: print "Call to sub x returns ", &x(), " at line 6.\n";
         >> ./test:12:   print "In sub x at line 12.\n";
+        In sub x at line 12.
         >> ./test:13:   return 13;
+        Call to sub x returns 13 at line 6.
         >> ./test:8: exit 0;
 
 This is something like the shell's C<-x> option.
