@@ -4,12 +4,17 @@ package Devel::Trace;
 $VERSION = '0.12';
 $TRACE = 1;
 
+# Save STDERR right away in case someone else changes it
+# https://rt.cpan.org/Public/Bug/Display.html?id=113090
+open OUT, '>&', STDERR;
+$oldfh = select(OUT); $| = 1; select($oldfh);
+
 # This is the important part.  The rest is just fluff.
 sub DB::DB {
   return unless $TRACE;
   my ($p, $f, $l) = caller;
   my $code = \@{"::_<$f"};
-  print STDERR ">> $f:$l: $code->[$l]";
+  print OUT ">> $f:$l: $code->[$l]";
 }
 
 
@@ -47,19 +52,19 @@ Devel::Trace - Print out each line before it is executed (like C<sh -x>)
 =head1 DESCRIPTION
 
 If you run your program with C<perl -d:Trace program>, this module
-will print a message to standard error just before each line is executed.  
+will print a message to standard error just before each line is executed.
 For example, if your program looks like this:
 
         #!/usr/bin/perl
-        
-        
+
+
         print "Statement 1 at line 4\n";
         print "Statement 2 at line 5\n";
         print "Call to sub x returns ", &x(), " at line 6.\n";
-        
+
         exit 0;
-        
-        
+
+
         sub x {
           print "In sub x at line 12.\n";
           return 13;
@@ -134,7 +139,7 @@ Devel::Trace 0.11 and its source code are hereby placed in the public domain.
 Mark-Jason Dominus (C<mjd-perl-trace@plover.com>), Plover Systems co.
 
 See the C<Devel::Trace.pm> Page at http://www.plover.com/~mjd/perl/Trace
-for news and upgrades.  
+for news and upgrades.
 
 =end text
 
@@ -143,7 +148,7 @@ for news and upgrades.
 Mark-Jason Dominus (C<mjd-perl-trace@plover.com>), Plover Systems co.
 
 See the C<Devel::Trace.pm> Page at http://www.plover.com/~mjd/perl/Trace
-for news and upgrades.  
+for news and upgrades.
 
 =end man
 
